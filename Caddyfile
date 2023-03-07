@@ -1,0 +1,25 @@
+http://localhost:{$PORT} {
+    log
+
+    @proxy {
+        path_regexp ^/proxy(.*)
+    }
+    handle @proxy {
+        vars {
+            upstream {query.self_upstream}
+            path {query.self_path}
+        }
+        rewrite * /{vars.path}
+        reverse_proxy {vars.upstream} {
+            header_up host {vars.upstream}
+            transport http {
+                tls
+                resolvers 8.8.8.8:53
+            }
+        }
+    }
+
+    handle /api {
+        reverse_proxy http://localhost:3333
+    }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "ytmusic-api-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "patch": "npm version patch && git push origin main && git push origin --tags",
+    "minor": "npm version minor && git push origin main && git push origin --tags",
+    "major": "npm version major && git push origin main && git push origin --tags"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xizeyoupan/ytmusic-api-server.git"
+  },
+  "author": "xizeyoupan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xizeyoupan/ytmusic-api-server/issues"
+  },
+  "homepage": "https://github.com/xizeyoupan/ytmusic-api-server#readme",
+  "dependencies": {
+    "@koa/router": "^12.0.0",
+    "koa": "^2.14.1",
+    "koa-logger": "^3.2.1",
+    "node-cache": "^5.1.2",
+    "ytdl-core": "^4.11.2"
+  }
+}
