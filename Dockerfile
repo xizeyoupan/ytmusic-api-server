@@ -13,7 +13,7 @@ COPY . /app
 
 RUN apk add --update nano nodejs npm python3 py3-pip caddy \
     && pip3 install -r requirements.txt \
-    && npm i
+    && npm i --omit=dev && cd whatis-core && npm i --omit=dev && cd .. && mv whatis-core node_modules/
 
 RUN addgroup -g ${GID} --system ytmusicapi \
     && adduser -G ytmusicapi --system -D -s /bin/sh -u ${UID} ytmusicapi

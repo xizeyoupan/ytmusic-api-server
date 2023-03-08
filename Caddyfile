@@ -1,4 +1,4 @@
-http://localhost:{$PORT} {
+:{$PORT} {
     log
 
     @proxy {
@@ -20,6 +20,8 @@ http://localhost:{$PORT} {
     }
 
     handle /api {
-        reverse_proxy http://localhost:3333
+        reverse_proxy http://0.0.0.0:3333 {
+            header_up X-Forwarded-Proto {header.X-Forwarded-Proto}
+        }
     }
 }
