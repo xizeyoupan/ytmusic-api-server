@@ -60,6 +60,7 @@ router
                     const { stdout, stderr } = await exec(`python ${__dirname}/api.py playlist ${id}`)
                     console.log(stdout)
                     data = JSON.parse(stdout)
+                    data = data.filter(i => i.id)
                     set_cache(data)
 
                     const ids = data.map(song => song.id)
