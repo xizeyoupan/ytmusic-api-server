@@ -12,7 +12,7 @@ from ytmusicapi import YTMusic
 
 currentPath = os.path.dirname(os.path.realpath(__file__))
 
-yt = YTMusic()
+yt = YTMusic(language="zh_CN")
 parser = argparse.ArgumentParser()
 
 
