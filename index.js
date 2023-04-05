@@ -7,7 +7,6 @@ import Router from '@koa/router'
 import logger from 'koa-logger'
 import cors from '@koa/cors'
 import NodeCache from "node-cache"
-import ytdl from 'whatis-core'
 
 
 const __dirname = path.resolve()
@@ -38,6 +37,14 @@ const wrap_url = (origin, song) => {
     song.url = `${origin}/api?&type=url&id=${song.id}`
     song.lrc = `${origin}/api?&type=lrc&id=${song.id}`
     return song
+}
+
+let { stdout, stderr } = await exec(`pip3 list`)
+console.log(stdout)
+
+if (!stdout.includes('yt-dlp')) {
+    stdout = (await exec(`pip3 install yt-dlp`)).stdout
+    console.log(stdout)
 }
 
 router
@@ -81,11 +88,10 @@ router
             case 'url':
                 let url = urlCache.get(id)
                 if (!url) {
-                    const info = await ytdl.getInfo(id)
-                    const format = ytdl.chooseFormat(info.formats, { quality: 'highestaudio' })
-                    url = format.url
-                    urlCache.set(id, url)
+                    const { stdout, stderr } = await exec(`~/.local/bin/yt-dlp --get-url -f ba https://youtube.com/watch?v=${id}`)
+                    url = stdout
                     console.log(url)
+                    urlCache.set(id, url)
                 }
 
                 // let req_h = ctx.req.headers
@@ -116,4 +122,5 @@ app
     .use(router.routes())
     .use(router.allowedMethods())
 
+console.log(`start listen on 0.0.0.0:3333`)
 app.listen(3333, '0.0.0.0')
