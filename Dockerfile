@@ -11,7 +11,7 @@ ENV PORT=${PORT:-3000}
 WORKDIR /app
 COPY . /app
 
-RUN apk add --update nano nodejs npm python3 py3-pip caddy \
+RUN apk add --update nano nodejs npm python3 py3-pip caddy ffmpeg \
     && pip3 install -r requirements.txt \
     && npm i --omit=dev
 

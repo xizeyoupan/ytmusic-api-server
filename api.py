@@ -6,6 +6,7 @@ import time
 from functools import cache
 from io import BytesIO
 
+import syncedlyrics
 # import requests
 # from yt_dlp import YoutubeDL
 from ytmusicapi import YTMusic
@@ -78,6 +79,10 @@ def get_single_song(id):
 # res = get_single_song("U8E3j6y__BA")
 # print(res)
 
+def get_lyrics(s):
+    return syncedlyrics.search(s, providers=["NetEase", "Musixmatch", "Lyricsify","Megalobiz"])
+
+
 parser.add_argument('type', type=str)
 parser.add_argument('id', type=str)
 args = parser.parse_args()
@@ -86,3 +91,5 @@ if args.type == 'playlist':
     print(get_playlist(args.id))
 elif args.type == 'song':
     print(get_single_song(args.id))
+elif args.type == 'lyrics':
+    print(get_lyrics(args.id))
