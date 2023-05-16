@@ -3,7 +3,8 @@
 ## docker
 
 intemd/ytmusic-api
-sudo docker  run -it --name meting-additional -p 3000:3000  intemd/ytmusic-api:latest
+
+sudo docker run -d --name meting-additional -p 3000:3000 intemd/ytmusic-api:latest
 
 ## 环境变量/配置
 

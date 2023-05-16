@@ -61,16 +61,28 @@ const handle = async (type, id, myCache, cookie = '') => {
             result = data
             break
         case 'url':
-            const cmd = `python -m spotdl url https://open.spotify.com/track/${id}`
+            let cmd = `python -m spotdl url https://open.spotify.com/track/${id}`
             console.log(cmd)
-            const { stdout, stderr } = await exec(cmd)
-            const url = stdout.split('\n').reverse()[2]
+            let { stdout, stderr } = await exec(cmd)
+            let output = stdout.split('\n')
+            console.log(output)
+            let url = output.reverse()[2]
+
+            if (!url.startsWith('http')) {
+                // not match
+                cmd = `python -m yt_dlp ytsearch1:"${data.title.replaceAll('"', "'")} ${data.author.replaceAll('"', "'")}" --get-url -f ba`
+                console.log(cmd)
+                let { stdout, stderr } = await exec(cmd)
+                output = stdout.split('\n')
+                console.log(output)
+                url = output[0]
+            }
             result = url
             break
         case 'lrc':
             let lrc = data.lrc
             if (!lrc) {
-                const cmd = `python ${__dirname}/api.py lyrics "${data.title + ' ' + data.author}"`
+                const cmd = `python ${__dirname}/api.py lyrics "${data.title.replaceAll('"', "'")} ${data.author.replaceAll('"', "'")}"`
                 console.log(cmd)
                 const { stdout, stderr } = await exec(cmd)
                 lrc = stdout
