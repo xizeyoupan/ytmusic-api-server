@@ -24,18 +24,18 @@ const wrap_url = (server, origin, song) => {
     return song
 }
 
-let { stdout, stderr } = await exec(`pip3 list`)
-console.log(stdout)
+// let { stdout, stderr } = await exec(`pip3 list`)
+// console.log(stdout)
 
-if (!stdout.includes('yt-dlp')) {
-    stdout = (await exec(`pip3 install yt-dlp`)).stdout
-    console.log(stdout)
-}
+// if (!stdout.includes('yt-dlp')) {
+//     stdout = (await exec(`pip3 install yt-dlp`)).stdout
+//     console.log(stdout)
+// }
 
-if (!stdout.includes('spotdl')) {
-    stdout = (await exec(`pip3 install spotdl`)).stdout
-    console.log(stdout)
-}
+// if (!stdout.includes('spotdl')) {
+//     stdout = (await exec(`pip3 install spotdl`)).stdout
+//     console.log(stdout)
+// }
 
 router
     // .head(/.*/, ctx => ctx.status = 405)

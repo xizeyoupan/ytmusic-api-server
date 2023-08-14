@@ -1,2 +1,4 @@
-ytmusicapi==0.25.0
-syncedlyrics==0.5.0
+ytmusicapi
+syncedlyrics
+yt-dlp
+spotdl
