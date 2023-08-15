@@ -1,4 +1,4 @@
 ytmusicapi
-syncedlyrics
+syncedlyrics_aio
 yt-dlp
 spotdl
