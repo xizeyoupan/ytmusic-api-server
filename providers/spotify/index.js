@@ -84,7 +84,7 @@ const handle = async (type, id, myCache, cookie = '') => {
         case 'lrc':
             let lrc = data.lrc
             if (!lrc) {
-                const cmd = `python -m syncedlyrics_aio "${data.title.replaceAll('"', "'")} ${data.author.replaceAll('"', "'")}" -d ${data.duration} -m 20000`
+                const cmd = `python -m syncedlyrics_aio "${data.title.replaceAll('"', "'")} ${data.author.replaceAll('"', "'")}" -d ${data.duration} -m 20000 -p "NetEase Tencent"`
                 console.log(cmd)
                 const { stdout, stderr } = await exec(cmd)
                 lrc = stdout
