@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ytmusic-api-server"
+version = "0.1.0"
+description = ""
+authors = ["xizeyoupan <44920131+xizeyoupan@users.noreply.github.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+ytmusicapi = "^1.8.0"
+syncedlyrics-aio = "^1.0.2"
+yt-dlp = "^2024.7.25"
+spotdl = "^4.2.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

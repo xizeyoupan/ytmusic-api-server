@@ -12,7 +12,7 @@ const handle = async (type, id, myCache, cookie = '') => {
 
     if (type !== 'playlist') {
         if (!data) {
-            const cmd = `python ${__dirname}/api.py song ${id}`
+            const cmd = `poetry run python ${__dirname}/api.py song ${id}`
             console.log(cmd)
             const { stdout, stderr } = await exec(cmd)
             console.log(stdout)
@@ -26,7 +26,7 @@ const handle = async (type, id, myCache, cookie = '') => {
     switch (type) {
         case 'playlist':
             if (!data) {
-                const cmd = `python ${__dirname}/api.py playlist ${id}`
+                const cmd = `poetry run python ${__dirname}/api.py playlist ${id}`
                 console.log(cmd)
                 const { stdout, stderr } = await exec(cmd)
                 data = JSON.parse(stdout)
@@ -37,7 +37,7 @@ const handle = async (type, id, myCache, cookie = '') => {
             result = data
             break
         case 'url':
-            const cmd = `python -m yt_dlp --get-url -f ba https://youtube.com/watch?v=${id}`
+            const cmd = `poetry run python -m yt_dlp --get-url -f ba https://youtube.com/watch?v=${id}`
             console.log(cmd)
             const { stdout, stderr } = await exec(cmd)
             const url = stdout
@@ -46,7 +46,7 @@ const handle = async (type, id, myCache, cookie = '') => {
         case 'lrc':
             let lrc = data.lrc
             if (!lrc) {
-                const cmd = `python -m syncedlyrics_aio "${data.title + ' ' + data.author}" -d ${data.duration} -m 20000 -p "NetEase Tencent"`
+                const cmd = `poetry run python -m syncedlyrics_aio "${data.title + ' ' + data.author}" -d ${data.duration} -m 20000 -p "NetEase" "Tencent"`
                 console.log(cmd)
                 const { stdout, stderr } = await exec(cmd)
                 lrc = stdout

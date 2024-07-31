@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM alpine:3.20.2
 
 ARG UID
 ARG GID
@@ -11,8 +11,7 @@ ENV PORT=${PORT:-3000}
 WORKDIR /app
 COPY . /app
 
-RUN apk add --update nano nodejs npm python3 py3-pip caddy ffmpeg \
-    && pip3 install -r requirements.txt \
+RUN apk add --update nano nodejs npm python3 caddy ffmpeg poetry \
     && npm i --omit=dev
 
 RUN addgroup -g ${GID} --system ytmusicapi \
@@ -23,4 +22,4 @@ USER ytmusicapi
 
 EXPOSE ${PORT}
 
-CMD caddy start --config /app/Caddyfile && node index.js
+CMD poetry install && caddy start --config /app/Caddyfile && node index.js

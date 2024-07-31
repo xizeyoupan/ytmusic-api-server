@@ -13,7 +13,7 @@ const handle = async (type, id, myCache, cookie = '') => {
 
     if (type !== 'playlist') {
         if (!data) {
-            const cmd = `python -m spotdl save https://open.spotify.com/track/${id}  --save-file ${__dirname}/list.spotdl`
+            const cmd = `poetry run python -m spotdl save https://open.spotify.com/track/${id}  --save-file ${__dirname}/list.spotdl`
             console.log(cmd)
             const { stdout, stderr } = await exec(cmd)
             console.log(stdout)
@@ -40,7 +40,7 @@ const handle = async (type, id, myCache, cookie = '') => {
     switch (type) {
         case 'playlist':
             if (!data) {
-                const cmd = `python -m spotdl save https://open.spotify.com/playlist/${id}  --save-file ${__dirname}/list.spotdl`
+                const cmd = `poetry run python -m spotdl save https://open.spotify.com/playlist/${id}  --save-file ${__dirname}/list.spotdl`
                 console.log(cmd)
                 const { stdout, stderr } = await exec(cmd)
                 console.log(stdout)
@@ -63,7 +63,7 @@ const handle = async (type, id, myCache, cookie = '') => {
             result = data
             break
         case 'url':
-            let cmd = `python -m spotdl url https://open.spotify.com/track/${id}`
+            let cmd = `poetry run python -m spotdl url https://open.spotify.com/track/${id}`
             console.log(cmd)
             let { stdout, stderr } = await exec(cmd)
             let output = stdout.split('\n')
@@ -72,7 +72,7 @@ const handle = async (type, id, myCache, cookie = '') => {
 
             if (!url.startsWith('http')) {
                 // not match
-                cmd = `python -m yt_dlp ytsearch1:"${data.title.replaceAll('"', "'")} ${data.author.replaceAll('"', "'")}" --get-url -f ba`
+                cmd = `poetry run python -m yt_dlp ytsearch1:"${data.title.replaceAll('"', "'")} ${data.author.replaceAll('"', "'")}" --get-url -f ba`
                 console.log(cmd)
                 let { stdout, stderr } = await exec(cmd)
                 output = stdout.split('\n')
@@ -84,7 +84,7 @@ const handle = async (type, id, myCache, cookie = '') => {
         case 'lrc':
             let lrc = data.lrc
             if (!lrc) {
-                const cmd = `python -m syncedlyrics_aio "${data.title.replaceAll('"', "'")} ${data.author.replaceAll('"', "'")}" -d ${data.duration} -m 20000 -p "NetEase Tencent"`
+                const cmd = `poetry run python -m syncedlyrics_aio "${data.title.replaceAll('"', "'")} ${data.author.replaceAll('"', "'")}" -d ${data.duration} -m 20000 -p "NetEase Tencent"`
                 console.log(cmd)
                 const { stdout, stderr } = await exec(cmd)
                 lrc = stdout
